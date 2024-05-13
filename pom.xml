@@ -20,6 +20,7 @@
         <module>boot-starter-custom-ref</module>
         <module>boot-config-import</module>
         <module>boot-validation-i18n</module>
+        <module>boot-webmvc-handler-mapping</module>
         <module>web-common</module>
     </modules>
     <properties>
