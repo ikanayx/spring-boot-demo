@@ -23,6 +23,7 @@
         <module>boot-webmvc-handler-mapping</module>
         <module>rate-limit</module>
         <module>web-common</module>
+        <module>boot-openapi3</module>
     </modules>
     <properties>
         <java.version>21</java.version>
