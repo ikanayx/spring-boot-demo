@@ -1,0 +1,18 @@
+spring:
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
+  ratelimiter:
+    enabled: true
+    redis-address: redis://127.0.0.1:6379
+    redis-database: 0
+    exceptionHandler:
+      enable: false
+
+extend:
+  ratelimiter:
+    bucket-capacity: 5 # 令牌桶最多保留5个令牌(瞬时最大流量为5)
+    permits-rate: 1 # 1秒生成1个令牌
+    time-window-rate: 10

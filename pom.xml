@@ -21,6 +21,7 @@
         <module>boot-config-import</module>
         <module>boot-validation-i18n</module>
         <module>boot-webmvc-handler-mapping</module>
+        <module>rate-limit</module>
         <module>web-common</module>
     </modules>
     <properties>
