@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div>
+        <label for="reconnectAfter">超时重连: </label><input id="reconnectAfter" value="20" />
+        <button id="switch">开启</button>
+    </div>
+    <div id="message"></div>
+</div>
+<script>
+let status = 0
+let es
+
+document.getElementById('switch').addEventListener('click', function () {
+    if (status === 0) {
+        startSse()
+    } else {
+        endSse()
+    }
+})
+
+function startSse() {
+    const reconnectAfter = document.getElementById('reconnectAfter').value
+    es = new EventSource(`http://localhost:8080/emitter/subscribe?reconnectAfter=${reconnectAfter}`)
+    es.onopen = () => {
+        console.log('sse connection established.')
+        status = 1
+        document.getElementById('switch').innerText = '关闭'
+
+        const content = document.getElementById('message').innerText
+        document.getElementById('message').innerText = content + '\n开启'
+    }
+    es.onmessage = (event) => {
+        console.log(`receive server event: `, event)
+        const content = document.getElementById('message').innerText
+        document.getElementById('message').innerText = content + '\n' + event.data
+    }
+}
+
+function endSse() {
+    return fetch('http://localhost:8080/emitter/unsubscribe', { method: "POST", mode: "cors",})
+        .then(() => {
+            status = 0
+            document.getElementById('switch').innerText = '开启'
+            if (es) es.close()
+
+            const content = document.getElementById('message').innerText
+            document.getElementById('message').innerText = content + '\n关闭'
+        })
+}
+</script>
+</body>
+</html>
