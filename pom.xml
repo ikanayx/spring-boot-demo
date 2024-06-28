@@ -26,6 +26,7 @@
         <module>boot-openapi3</module>
         <module>boot-sse</module>
         <module>boot-async</module>
+        <module>web-totp</module>
     </modules>
     <properties>
         <java.version>21</java.version>
